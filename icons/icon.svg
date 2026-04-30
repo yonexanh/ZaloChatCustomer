@@ -1,0 +1,36 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="18" y1="12" x2="112" y2="116" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#28A7FF"/>
+      <stop offset="1" stop-color="#0068FF"/>
+    </linearGradient>
+    <filter id="shadow" x="18" y="26" width="76" height="62" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="3"/>
+      <feGaussianBlur stdDeviation="2"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0196078 0 0 0 0 0.215686 0 0 0 0 0.568627 0 0 0 0.25 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_2"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_2" result="shape"/>
+    </filter>
+  </defs>
+
+  <rect x="8" y="8" width="112" height="112" rx="28" fill="url(#bg)"/>
+  <rect x="8" y="8" width="112" height="112" rx="28" stroke="#D4EEFF" stroke-width="2"/>
+
+  <g filter="url(#shadow)">
+    <path
+      d="M35 33C28.9249 33 24 37.9249 24 44V66C24 72.0751 28.9249 77 35 77H46.8622C47.6231 77 48.3533 77.3013 48.8925 77.8386L56.4333 85.3527C57.6941 86.609 59.8462 85.716 59.8462 83.9361V77H76C82.0751 77 87 72.0751 87 66V44C87 37.9249 82.0751 33 76 33H35Z"
+      fill="white"
+    />
+    <rect x="38" y="47" width="36" height="6" rx="3" fill="#0F5FEA"/>
+    <rect x="38" y="59" width="24" height="6" rx="3" fill="#89C9FF"/>
+  </g>
+
+  <g>
+    <circle cx="88" cy="88" r="24" fill="#FFCF33"/>
+    <circle cx="88" cy="88" r="22.5" stroke="#FFF4C2" stroke-width="3"/>
+    <circle cx="88" cy="88" r="4" fill="#0F5FEA"/>
+    <path d="M88 74V88L98 94" stroke="#0F5FEA" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

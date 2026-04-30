@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Zalo Scheduler</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="panel hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Bản ổn định</p>
+          <h1>Hẹn giờ gửi Zalo</h1>
+          <p id="metaText" class="meta">v--</p>
+        </div>
+        <div class="hero-actions">
+          <button id="captureConversationBtn" type="button" class="primary">Lấy khách từ tab đang mở</button>
+          <button id="refreshBtn" type="button" class="ghost">Tải lại</button>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="Tổng quan lịch gửi">
+        <article class="stat-card">
+          <span class="stat-label">Đang chờ</span>
+          <strong id="pendingCountText" class="stat-value">0</strong>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Đang chạy</span>
+          <strong id="runningCountText" class="stat-value">0</strong>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Đã gửi</span>
+          <strong id="sentCountText" class="stat-value">0</strong>
+        </article>
+        <article class="stat-card stat-card-error">
+          <span class="stat-label">Lỗi</span>
+          <strong id="failedCountText" class="stat-value">0</strong>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="target-box">
+          <span class="eyebrow">Khách đang chọn</span>
+          <strong id="selectedConversationText">Chưa lấy từ Zalo Web</strong>
+          <p id="selectedConversationHint" class="hint">
+            Mở đúng cuộc trò chuyện trên <code>chat.zalo.me</code> rồi bấm nút ở trên.
+          </p>
+        </div>
+
+        <form id="scheduleForm" class="form">
+          <div class="field-grid">
+            <label class="field">
+              <span>Mẫu cố định</span>
+              <select id="presetSelect" name="presetId">
+                <option value="">Đang tải thư viện mẫu...</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Thời gian gửi</span>
+              <input id="datetimeInput" name="scheduledAt" type="datetime-local" required />
+            </label>
+          </div>
+
+          <div id="presetSummary" class="summary-box" data-state="empty">
+            <strong id="presetTitle">Chưa chọn mẫu</strong>
+            <p id="presetDescription" class="hint">
+              Chọn một dòng trong <code>preset-library.json</code> nếu muốn dùng nội dung và ảnh có sẵn.
+            </p>
+          </div>
+
+          <label class="field">
+            <span>Khách hàng / cuộc trò chuyện</span>
+            <input
+              id="conversationInput"
+              name="conversationName"
+              type="text"
+              autocomplete="off"
+              placeholder="Ví dụ: Nguyễn Văn A"
+              required
+            />
+          </label>
+
+          <label class="field">
+            <span>Nội dung tin nhắn</span>
+            <textarea
+              id="messageInput"
+              name="message"
+              rows="5"
+              placeholder="Có thể để trống nếu mẫu chỉ gửi ảnh hoặc ảnh đã gắn sẵn"
+            ></textarea>
+          </label>
+
+          <div class="preset-edit-bar">
+            <div class="preset-edit-copy">
+              <strong id="presetEditTitle">Nội dung mẫu cố định</strong>
+              <p id="presetEditHint" class="hint">
+                Chọn một mẫu rồi sửa nội dung ở trên nếu muốn lưu lại cho những lần sau.
+              </p>
+            </div>
+            <div class="preset-edit-actions">
+              <button id="savePresetMessageBtn" type="button" class="secondary" disabled>
+                Lưu nội dung vào mẫu
+              </button>
+              <button id="resetPresetMessageBtn" type="button" class="ghost" disabled>
+                Khôi phục nội dung gốc
+              </button>
+            </div>
+          </div>
+
+          <div id="assetSummary" class="summary-box" data-state="empty">
+            <strong id="assetNameText">Không gửi kèm ảnh</strong>
+            <p id="assetPathText" class="hint">
+              Ảnh chỉ lấy từ thư mục <code>preset-assets/</code>, không cần chọn file thủ công.
+            </p>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="primary">Lưu lịch gửi</button>
+          </div>
+
+          <p class="hint">
+            Khi thêm ảnh mới vào <code>preset-assets/</code> hoặc sửa <code>preset-library.json</code>,
+            hãy vào <code>chrome://extensions</code> và bấm <code>Reload</code>.
+          </p>
+
+          <p id="statusText" class="status" hidden></p>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="section-head">
+          <div>
+            <h2>Lịch đã tạo</h2>
+            <p class="section-note">Xem nhanh trạng thái, lần chạy và log chi tiết của từng lịch.</p>
+          </div>
+          <span id="scheduleCountText" class="count-chip">0</span>
+        </div>
+        <div id="scheduleList" class="schedule-list"></div>
+      </section>
+    </main>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

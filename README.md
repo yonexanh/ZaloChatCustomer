@@ -1,71 +1,71 @@
 # Zalo Scheduler
 
-Ban viet lai tu dau theo huong on dinh hon cho nhu cau:
+Bản viết lại từ đầu theo hướng ổn định hơn cho nhu cầu:
 
-- Hen gio gui tin nhan cho khach hang tren `https://chat.zalo.me/`
-- Anh duoc luu san trong project, khong can chon file thu cong
-- Uu tien tranh gui lap hon la co gang retry nhieu lan
+- Hẹn giờ gửi tin nhắn cho khách hàng trên `https://chat.zalo.me/`
+- Ảnh được lưu sẵn trong project, không cần chọn file thủ công
+- Ưu tiên tránh gửi lặp hơn là cố gắng retry nhiều lần
 
-## Kien truc moi
+## Kiến trúc mới
 
 - `popup.html` / `popup.js`
-  Popup gon, chi giu:
-  - Lay cuoc tro chuyen dang mo
-  - Chon preset trong `preset-library.json`
-  - Sua noi dung neu can
-  - Chon gio gui
-  - Xem, gui ngay, xoa lich
+  Popup gọn, chỉ giữ:
+  - Lấy cuộc trò chuyện đang mở
+  - Chọn preset trong `preset-library.json`
+  - Sửa nội dung nếu cần
+  - Chọn giờ gửi
+  - Xem, gửi ngay, xóa lịch
 
 - `background.js`
-  Quan ly lich bang `chrome.storage.local` va `chrome.alarms`.
-  Moi lich chi co mot execution lock. Neu phien cu dang do dang hoac bi gian doan, app danh dau `failed` thay vi tu retry de tranh gui trung.
+  Quản lý lịch bằng `chrome.storage.local` và `chrome.alarms`.
+  Mỗi lịch chỉ có một execution lock. Nếu phiên cũ đang dở dang hoặc bị gián đoạn, app đánh dấu `failed` thay vì tự retry để tránh gửi trùng.
 
 - `content.js`
-  Chi giu mot luong gui duy nhat:
-  1. Chon dung cuoc tro chuyen
-  2. Gan anh tu `preset-assets/`
-  3. Chen noi dung
-  4. Bam gui dung mot lan
-  5. Xac minh bang DOM
+  Chỉ giữ một luồng gửi duy nhất:
+  1. Chọn đúng cuộc trò chuyện
+  2. Gắn ảnh từ `preset-assets/`
+  3. Chèn nội dung
+  4. Bấm gửi đúng một lần
+  5. Xác minh bằng DOM
 
-## Cai dat
+## Cài đặt
 
-1. Mo `chrome://extensions`
-2. Bat `Developer mode`
-3. Bam `Load unpacked`
-4. Chon thu muc nay: `/Users/mac/Documents/ZaloChatCus`
-5. Reload extension neu truoc do da tung load ban cu
+1. Mở `chrome://extensions`
+2. Bật `Developer mode`
+3. Bấm `Load unpacked`
+4. Chọn thư mục này: `/Users/mac/Documents/ZaloChatCus`
+5. Reload extension nếu trước đó đã từng load bản cũ
 
-## Cach dung
+## Cách dùng
 
-1. Dang nhap Zalo Web tren `https://chat.zalo.me/`
-2. Mo dung cuoc tro chuyen cua khach
-3. Mo extension va bam `Lay khach tu tab dang mo`
-4. Chon preset neu muon gui anh / noi dung co san
-5. Chinh lai noi dung neu can
-6. Chon thoi gian gui va bam `Luu lich gui`
+1. Đăng nhập Zalo Web trên `https://chat.zalo.me/`
+2. Mở đúng cuộc trò chuyện của khách
+3. Mở extension và bấm `Lấy khách từ tab đang mở`
+4. Chọn preset nếu muốn gửi ảnh / nội dung có sẵn
+5. Chỉnh lại nội dung nếu cần
+6. Chọn thời gian gửi và bấm `Lưu lịch gửi`
 
-## Quan ly anh mau
+## Quản lý ảnh mẫu
 
-- Dat anh vao thu muc `preset-assets/`
-- Khai bao trong `preset-library.json`
-- Sau khi them anh moi hoac sua JSON, vao `chrome://extensions` va bam `Reload`
+- Đặt ảnh vào thư mục `preset-assets/`
+- Khai báo trong `preset-library.json`
+- Sau khi thêm ảnh mới hoặc sửa JSON, vào `chrome://extensions` và bấm `Reload`
 
-Vi du:
+Ví dụ:
 
 ```json
 {
   "id": "nhac-checkout",
-  "label": "Nhac check out",
-  "message": "Noi dung can gui",
+  "label": "Nhắc check out",
+  "message": "Nội dung cần gửi",
   "imagePath": "preset-assets/checkout.png",
   "imageName": "checkout.png"
 }
 ```
 
-## Chu y ve do on dinh
+## Chú ý về độ ổn định
 
-- Ban moi khong con upload file thu cong
-- Khong con debugger, offscreen, clipboard flow, hay retry nhieu nhanh
-- Neu o chat dang co ban nhap / anh cho gui, lich se `failed` thay vi co gang gui de tranh nham lan
-- Neu Zalo doi DOM, can chinh selector trong `content.js`
+- Bản mới không còn upload file thủ công
+- Không còn debugger, offscreen, clipboard flow, hay retry nhiều nhánh
+- Nếu ô chat đang có bản nháp / ảnh chờ gửi, lịch sẽ `failed` thay vì cố gắng gửi để tránh nhầm lẫn
+- Nếu Zalo đổi DOM, cần chỉnh selector trong `content.js`

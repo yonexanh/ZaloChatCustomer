@@ -5,25 +5,19 @@
       "id": "nhac-checkin-home-1",
       "label": "Nhắc check in Home 1",
       "description": "Mẫu cố định cho khách check in Home 1. Dán nội dung thật của anh vào đây và thêm ảnh nếu cần.",
-      "message": "Mật khẩu phòng là: 7979.",
-      "imagePath": "preset-assets/checkin1kopass.jpg",
-      "imageName": "checkin1kopass.jpg"
+      "message": "Mật khẩu phòng là: 7979."
     },
     {
       "id": "nhac-checkin-home-2",
       "label": "Nhắc check in Home 2",
       "description": "Mẫu cố định cho khách check in Home 2. Dán nội dung thật của anh vào đây và thêm ảnh nếu cần.",
-      "message": "Mật khẩu phòng là: 7979.",
-      "imagePath": "preset-assets/checkin2kopass.jpg",
-      "imageName": "checkin2kopass.jpg"
+      "message": "Mật khẩu phòng là: 7979."
     },
     {
       "id": "nhac-checkout",
       "label": "Nhắc check out",
       "description": "Mẫu nhắc khách trước khi check out. Đổi nội dung hoặc gắn ảnh riêng của anh trong preset-assets.",
-      "message": "đánh giá 5🌟 nếu khách hài lòng tại đây ạ: https://g.page/r/Cd4wa3GjW8B8EAE/review",
-      "imagePath": "preset-assets/checkout.png",
-      "imageName": "checkout.png"
+      "message": "đánh giá 5🌟 nếu khách hài lòng tại đây ạ: https://g.page/r/Cd4wa3GjW8B8EAE/review"
     }
   ]
 }

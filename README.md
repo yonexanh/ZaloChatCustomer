@@ -58,8 +58,8 @@ Ví dụ:
   "id": "nhac-checkout",
   "label": "Nhắc check out",
   "message": "Nội dung cần gửi",
-  "imagePath": "preset-assets/checkout.png",
-  "imageName": "checkout.png"
+  "imagePath": "preset-assets/anh-mau.png",
+  "imageName": "anh-mau.png"
 }
 ```
 
